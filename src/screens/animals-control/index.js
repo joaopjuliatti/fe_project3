@@ -2,14 +2,12 @@ import React, { useContext } from 'react'
 
 import { theme } from '../../components/globalStyle'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
-import { TemplateContext } from '~/components/Template/context'
+import { TemplateContext } from '../../components/Template/context'
 
-import { InactivateUserModal } from './delete-modal'
-import { ListUpdatesModal } from './list-updates-modal'
+import { AddAnimalModal } from './add-animal-modal'
 
-import { SimpleTable } from '~/components/table'
-import { HeaderUserControl as Header } from '~/components/HeaderUserControl'
-import { Text } from '~/themes/styles'
+import { SimpleTable } from '../../components/table'
+import { Text } from '../../components/globalStyle'
 
 import { useListAnimals } from './hooks'
 import { Content, ContainerTable, WrapperTabs } from './styles'
@@ -18,29 +16,21 @@ export const ListAnimals = () => {
   const { setIsLoading, goToPage, activePage, setActivePage } = useContext(TemplateContext)
   const [
     showCells,
-    setRowsActive,
-    rowsActive,
-    setRowsDeactive,
-    rowsDeactive,
+    setRowsFattening,
+    rowsFattening,
+    setRowsSold,
+    rowsSold,
     warningMessage,
     visibleOpt,
     setVisibleOpt,
     handleModal,
-    showInativateUserModal,
-    showListUpdatesModal,
-    partnerEmployeeEmail,
-    listUpdates,
-    submitDeleteUser
+    showAddAnimalModal,
   ] = useListAnimals(setIsLoading, goToPage, activePage, setActivePage)
   return (
     <>
-      {showInativateUserModal && (
-        <InactivateUserModal handleModal={handleModal} email={partnerEmployeeEmail} submitDeleteUser={submitDeleteUser} />
+      {showAddAnimalModal && (
+        <AddAnimalModal handleModal={handleModal} />
       )}
-      {showListUpdatesModal && (
-        <ListUpdatesModal handleModal={handleModal} listUpdates={listUpdates} email={partnerEmployeeEmail} />
-      )}
-      <Header addNewMember />
       <Content>
         <WrapperTabs id="wrapper-tabs">
           <Tabs selectedIndex={visibleOpt.tabIndex} onSelect={tabIndex => setVisibleOpt({ tabIndex })}>
@@ -58,8 +48,8 @@ export const ListAnimals = () => {
                   ) : (
                     <SimpleTable
                       origin="users"
-                      setRows={setRowsActive}
-                      rows={rowsActive}
+                      setRows={setRowsFattening}
+                      rows={rowsFattening}
                       showCells={showCells}
                       headAlign="center"
                       headColor="#F8F5F5"
@@ -78,8 +68,8 @@ export const ListAnimals = () => {
                   ) : (
                     <SimpleTable
                       origin="users"
-                      setRows={setRowsDeactive}
-                      rows={rowsDeactive}
+                      setRows={setRowsSold}
+                      rows={rowsSold}
                       showCells={showCells}
                       headAlign="center"
                       headColor="#F8F5F5"

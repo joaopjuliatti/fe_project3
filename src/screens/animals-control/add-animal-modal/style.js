@@ -1,5 +1,10 @@
 import styled from 'styled-components'
-import { theme } from '../../components/globalStyle'
+
+import { theme } from '../../../components/globalStyle'
+
+export const Span = styled.span`
+  color: ${theme.colors.blue600};
+`
 
 export const Button = styled.a`
   display: inline-block;
@@ -11,7 +16,7 @@ export const Button = styled.a`
   color: white;
   border: 2px solid white;
   type : "submit";
-`
+` 
 
 export const Section = styled.div`
   margin-bottom: 15px;
@@ -35,16 +40,9 @@ export const Title = styled.div`
 `
 
 export const Form = styled.form`
-  /* align-items: center;
-  flex-direction: column;
-  display: flex; */
   margin-top: 34px;
   width: 100%;
   max-width: 400px;
-
-  ${theme.breakpoints.down('md')} {
-    width: 100%;
-  }
 
   .MuiInput-underline:after {
     border-bottom: 1px solid #ffffff;

@@ -2,12 +2,12 @@
 import React, { useState, useEffect } from 'react'
 import { theme, Text } from '../../components/globalStyle'
 
-import { addAnimal, getListAnimals } from '~/services/api'
+import { getListAnimals, repurchaseAnimal } from '~/services/api'
 
 import { Trash } from '../../../public/svgs/trash'
 import { Sell } from '../../../public/svgs/sell'
-import { asyncLocalStorage, formatDate } from '~/utils'
-import { showToast } from '~/components/toast'
+import { asyncLocalStorage, formatDate } from '../../utils'
+import { showToast } from '../../components/toast'
 
 import { WrapperIcon, ButtonOutline, BoxButton } from './styles'
 
@@ -35,58 +35,32 @@ export const useListAnimals = (setIsLoading, goToPage, activePage, setActivePage
 
   const [showAddAnimalModal, setShowAddAnimalModal] = useState(false)
 
-  const [partnerEmployeeEmail, setPartnerEmployeeEmail] = useState(``)
+  const handleModal = async (option) => {
+    setShowAddAnimalModal(option)
+  }
 
-  const [listUpdates, setListUpdates] = useState([])
-
-
-//   const handleModal = async (option, location) => {
-//     if (location === 'inativate') {
-//       setIsLoading(false)
-//     } else if (location === 'list-updates') {
-//       if (option === true) {
-//         const partnerEmployeeId = await asyncLocalStorage.getItem('partnerEmployeeId')
-//         const response = await getListUpdates({ partnerEmployeeId })
-//         const { response: listUpdatesEmployee, error } = response.data
-//         if (error) {
-//           showToast(`Error ao tentar visualizar o histórico de alteração do usuário`)
-//         } else {
-//           console.log(listUpdatesEmployee)
-//           setListUpdates([...listUpdatesEmployee])
-//           setIsLoading(false)
-//         }
-//         setIsLoading(false)
-//       }
-//       setShowListUpdatesModal(option)
-//     }
-//   }
-
-  const handleClick = async (option, email, id, active) => {
+  const handleClick = async (option, id) => {
     setIsLoading(true)
     if (!option) return
-    await asyncLocalStorage.setItem(`emailPartnerEmployee`, email)
-    await asyncLocalStorage.setItem(`partnerEmployeeId`, id)
+    const FarmId = await asyncLocalStorage.getItem('FarmId')
+
     if (option === 'delete') {
       setIsLoading(false)
-      setPartnerEmployeeEmail(email)
     } else if (option === 'history') {
       setIsLoading(false)
       setActivePage(`animals-control`)
       goToPage('animals/animal-history')
-    } else if (option === 'reactivate') {
-      const response = await updateUser({ partnerEmployeeId: id, active: true })
+    } else if (option === 'repurchase') {
+      const response = await repurchaseAnimal({ AnimalId: id })
       const { error } = response.data
       if (error) {
-        showToast(`Error tentando reativar o usuário`)
+        showToast(`Error tentando recomprar o animal`)
       } else {
         setUpdateTable(true)
         setIsLoading(false)
-        showToast(`Usuário reativado com sucesso`)
+        showToast(`Animal recomprado com sucesso`)
       }
       setIsLoading(false)
-    } else if (option === 'list-updates') {
-      setPartnerEmployeeEmail(email)
-      handleModal(true, 'list-updates')
     }
   }
 
@@ -105,15 +79,6 @@ export const useListAnimals = (setIsLoading, goToPage, activePage, setActivePage
             .filter(user => user.status = `fattening`)
             .map(user => {
               const { RealId, ageMonth, id, boughtAt, lastWeight} = user
-
-              /**
-                 email <> ok
-                 createAndEditCampaing <> ok
-                 salesVisualization <> ok
-                 acessManagement <> ok
-                 receivesControl <> ok
-                 editHistory <> ok
-                 */
 
               return {
                 RealId:  (
@@ -202,18 +167,6 @@ export const useListAnimals = (setIsLoading, goToPage, activePage, setActivePage
     setUpdateTable(false)
   }, [updateTable])
 
-  const submitInativateUser = async () => {
-    setIsLoading(true)
-    const partnerEmployeeId = await asyncLocalStorage.getItem('partnerEmployeeId')
-    const response = await updateUser({ partnerEmployeeId, active: false })
-    // const { error } = response.data
-    if (error) {
-      showToast(`Error ao tentar inativar um usuário`)
-    }
-    setUpdateTable(true)
-    setIsLoading(false)
-    showToast(`Usuário inativado com sucesso`)
-  }
 
   return [
     showCells,
@@ -226,7 +179,5 @@ export const useListAnimals = (setIsLoading, goToPage, activePage, setActivePage
     setVisibleOpt,
     handleModal,
     showAddAnimalModal,
-    partnerEmployeeEmail,
-    submitInativateUser
   ]
 }

@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
-import { theme } from '@provi/provi-components'
+import { theme } from '../globalStyle'
 import { makeStyles } from '@material-ui/core/styles'
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core'
 
@@ -28,7 +28,7 @@ export const SimpleTable = props => {
       whiteSpace: 'nowrap',
       color: theme.colors.blue900,
       fontSize:  '16px',
-      lineHeight: : '30px',
+      lineHeight:'30px',
       fontFamily: 'CenturyGothic !important',
       padding:  '16px !important'
     },

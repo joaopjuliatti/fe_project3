@@ -23,13 +23,10 @@ const  colors  = {
     white100: "#FFFFFF"
 }
 
-const theme = {
+export const theme = {
     colors:colors
 }
 
-module.exports = {
-    theme
-}
 
 export const Text = styled.div`
   ${({ color }) => (color ? `color: ${color};` : `color : ${theme.colors.blue900};`)}

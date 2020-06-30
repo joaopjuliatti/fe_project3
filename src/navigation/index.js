@@ -2,15 +2,15 @@
 import React from 'react'
 import { Redirect, Switch, Router } from 'react-router-dom'
 
-import { ToastComponent } from '~/components/toast'
+import { ToastComponent } from '../components/toast'
 import Route from './Route'
 import { routes } from './routes'
 
-
+import { history } from './history'
 
 export const Navigation = () => {
   return (
-    <Router>
+    <Router history={history}>
       <Switch>
         {routes.map(item => (
           <Route
@@ -22,8 +22,9 @@ export const Navigation = () => {
             component={item.component}
           />
         ))}
-        <Redirect to="/404" exact />
+        {/* <Redirect to="/404" exact /> */}
       </Switch>
+      <ToastComponent />
     </Router>
   )
 }
