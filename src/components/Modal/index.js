@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
-import { CloseModal } from '../../../public/svgs/close-modal'
+import { CloseModal } from '../../icons/svgs/close-modal'
 
 import { Overlay, Header, Body, Container, Title, CloseModalWrapper, Footer, Content } from './style'
 

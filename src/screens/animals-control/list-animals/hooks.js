@@ -1,23 +1,23 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react'
-import { theme, Text } from '../../components/globalStyle'
+import { theme, Text } from '../../../components/globalStyle'
 
-import { getListAnimals, repurchaseAnimal } from '~/services/api'
+import { getListAnimals, repurchaseAnimal,deactiveAnimal, sellAnimal } from '../../../services/api'
 
-import { Trash } from '../../../public/svgs/trash'
-import { Sell } from '../../../public/svgs/sell'
-import { asyncLocalStorage, formatDate } from '../../utils'
-import { showToast } from '../../components/toast'
+import { Trash } from '../../../icons/svgs/trash'
+import { Sell } from '../../../icons/svgs/sell'
+import { asyncLocalStorage, formatDate } from '../../../utils'
+import { showToast } from '../../../components/toast'
 
 import { WrapperIcon, ButtonOutline, BoxButton } from './styles'
 
 export const useListAnimals = (setIsLoading, goToPage, activePage, setActivePage) => {
 
   const INITIAL_STATE = [
-        { item: 'RealId', label: 'Número de Identificação', show: true, blocked: true },
-        { item: 'ageMonth ', label: 'Idade em Meses', show: true, blocked: true },
+        { item: 'RealId', label: 'Numero de Identificação', show: true, blocked: true },
+        { item: 'ageMonth', label: 'Idade em Meses', show: true, blocked: true },
         { item: 'lastWeight', label: 'Ultima Pesagem', show: true, blocked: true },
-        { item: 'boughtAt', label: 'Data do Primeiro Cadastro', show: true, blocked: true },
+        { item: 'boughtAt', label: 'Data de Aquisição/Nascimento', show: true, blocked: true },
         { item: 'editColumn', label: '', show: true, blocked: true }
     ]
 
@@ -36,6 +36,7 @@ export const useListAnimals = (setIsLoading, goToPage, activePage, setActivePage
   const [showAddAnimalModal, setShowAddAnimalModal] = useState(false)
 
   const handleModal = async (option) => {
+    setUpdateTable(option)
     setShowAddAnimalModal(option)
   }
 
@@ -43,15 +44,33 @@ export const useListAnimals = (setIsLoading, goToPage, activePage, setActivePage
     setIsLoading(true)
     if (!option) return
     const FarmId = await asyncLocalStorage.getItem('FarmId')
+    const token = await asyncLocalStorage.getItem('token')
 
-    if (option === 'delete') {
+    if (option === 'deactive') {
+      const response = await deactiveAnimal({AnimalId:id},token)
+      const { error } = response.data
+      if (error) {
+        showToast(`Error tentando desativar o animal`)
+      } else {
+        setUpdateTable(true)
+        setIsLoading(false)
+        showToast(`Animal desativado com sucesso`)
+      }
       setIsLoading(false)
-    } else if (option === 'history') {
+    } else if (option === 'sell') {
+      const response = await sellAnimal({AnimalId:id},token)
+      const { error } = response.data
+      if (error) {
+        showToast(`Error ao tentar vender o animal`)
+      } else {
+        setUpdateTable(true)
+        setIsLoading(false)
+        showToast(`Animal vendido com sucesso`)
+      }
       setIsLoading(false)
-      setActivePage(`animals-control`)
-      goToPage('animals/animal-history')
+      
     } else if (option === 'repurchase') {
-      const response = await repurchaseAnimal({ AnimalId: id })
+      const response = await repurchaseAnimal({AnimalId:id},token)
       const { error } = response.data
       if (error) {
         showToast(`Error tentando recomprar o animal`)
@@ -66,27 +85,28 @@ export const useListAnimals = (setIsLoading, goToPage, activePage, setActivePage
 
   const generateTables = async () => {
     setIsLoading(true)
-    if (activePage !== 'animal-control') setActivePage('animal-control')
+    if (activePage !== 'animals-control/list-animals') setActivePage('animals-control/list-animals')
     const getData = async () => {
+      const FarmId = await asyncLocalStorage.getItem('FarmId')
+      const token = await asyncLocalStorage.getItem('token')
       try {
         setWarningMessage('')
-        const response = await getListAnimals({ farm:1 })
+        const response = await getListAnimals(FarmId,token)
         if (response) {
           if (!response.data.animals.length > 0) {
             setWarningMessage('Ainda não existem animais cadastrados')
           }
           const rowsFatteningResponse = response.data.animals
-            .filter(user => user.status = `fattening`)
+            .filter(user => user.status === `fattening`)
             .map(user => {
               const { RealId, ageMonth, id, boughtAt, lastWeight} = user
-
               return {
                 RealId:  (
                   <Text bold align="center" color={theme.colors.blue900} size="16px">
                     {(RealId) || '---'}
                   </Text>
                 ),
-                ageMonth: (
+                ageMonth:(
                   <Text bold align="center" color={theme.colors.blue900} size="16px">
                     {(ageMonth) || '---'}
                   </Text>
@@ -103,12 +123,12 @@ export const useListAnimals = (setIsLoading, goToPage, activePage, setActivePage
                 ),
                 editColumn: (
                   <WrapperIcon>
-                    <BoxButton active={activePage === 'animal-control'} onClick={() => handleClick(`sell`,id)}>
+                    <BoxButton active={activePage === 'animals-control/list-animals'} onClick={() => handleClick(`sell`,id)}>
                       <Sell />
                     </BoxButton>
                     <BoxButton
-                      active={activePage === 'animal-control'}
-                      onClick={() => handleClick(`delete`, id)}
+                      active={activePage === 'animals-control/list-animals'}
+                      onClick={() => handleClick(`deactive`, id)}
                     >
                       <Trash />
                     </BoxButton>
@@ -118,7 +138,7 @@ export const useListAnimals = (setIsLoading, goToPage, activePage, setActivePage
             })
 
           const rowsDeactiveResponse = response.data.animals
-          .filter(user => user.status = `sold`)
+          .filter(user => user.status === `sold`)
             .map(user => {
 
               const { RealId, ageMonth, id, boughtAt, lastWeight} = user
@@ -165,7 +185,7 @@ export const useListAnimals = (setIsLoading, goToPage, activePage, setActivePage
     setIsLoading(true)
     generateTables()
     setUpdateTable(false)
-  }, [updateTable])
+  }, [])
 
 
   return [

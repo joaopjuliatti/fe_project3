@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { TemplateContext } from '~/components/Template/context'
+import { TemplateContext } from '../../components/Template/context'
 
 import { FormFormik } from './form'
 import { useLogin } from './hooks'

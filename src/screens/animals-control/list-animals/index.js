@@ -1,16 +1,18 @@
 import React, { useContext } from 'react'
 
-import { theme } from '../../components/globalStyle'
+import { theme } from '../../../components/globalStyle'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
-import { TemplateContext } from '../../components/Template/context'
+import { TemplateContext } from '../../../components/Template/context'
 
 import { AddAnimalModal } from './add-animal-modal'
+import { PlusIcon } from '../../../icons/svgs/plus'
 
-import { SimpleTable } from '../../components/table'
-import { Text } from '../../components/globalStyle'
+import { SimpleTable } from '../../../components/table'
+import { Header } from '../../../components/Header'
+import { Text } from '../../../components/globalStyle'
 
 import { useListAnimals } from './hooks'
-import { Content, ContainerTable, WrapperTabs } from './styles'
+import { Content, ContainerTable, WrapperTabs, BoxButton, WrapperIcon } from './styles'
 
 export const ListAnimals = () => {
   const { setIsLoading, goToPage, activePage, setActivePage } = useContext(TemplateContext)
@@ -29,14 +31,25 @@ export const ListAnimals = () => {
   return (
     <>
       {showAddAnimalModal && (
-        <AddAnimalModal handleModal={handleModal} />
+        <AddAnimalModal handleModal={handleModal} setIsLoading={setIsLoading} />
       )}
+      <Header showLinks>
+      {(
+        <WrapperIcon>
+          <BoxButton active={activePage === 'animal-control/list-animals'} onClick={() => handleModal(true)}>
+              <PlusIcon color={theme.colors.pink900} />
+              {'Adicionar Animal'}
+            </BoxButton>
+        </WrapperIcon>
+        )}
+
+      </Header>
       <Content>
         <WrapperTabs id="wrapper-tabs">
           <Tabs selectedIndex={visibleOpt.tabIndex} onSelect={tabIndex => setVisibleOpt({ tabIndex })}>
             <TabList>
-              <Tab>Usuários ativos</Tab>
-              <Tab>Usuários inativos</Tab>
+              <Tab>Animais para Engorda</Tab>
+              <Tab>Animais Vendidos</Tab>
             </TabList>
             <TabPanel>
               <>

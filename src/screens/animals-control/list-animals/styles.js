@@ -1,22 +1,14 @@
 import styled from 'styled-components'
 
-import { theme } from '../../components/globalStyle'
+import { theme } from '../../../components/globalStyle'
 
 export const Content = styled.div`
   margin-top: 81px;
   height: calc(100vh - 81px);
-  ${theme.breakpoints.down('md')} {
-    width: 100%;
-    height: calc(100% - 81pxpx);
-  }
 `
 export const ContainerTable = styled.div`
   height: calc(100vh - 191px) !important;
   width: 100vw;
-
-  ${theme.breakpoints.down('md')} {
-    /* padding: 0 20px; */
-  }
 `
 export const WrapperText = styled.div`
   display: inline-block;
@@ -69,26 +61,25 @@ export const WrapperTabs = styled.div`
     justify-content: center;
     border-bottom: 1px solid #cfcfcf;
     margin-bottom: 15px;
-    ${theme.breakpoints.down('md')} {
-    background-color: #f8f5f5;
+    list-style-type: none;
   };
     .react-tabs__tab {
       width: 25%;
       font-size: 16px !important;
       line-height: 24px !important;
       font-family: 'CenturyGothic';
-      color: ${theme.colors.blue900};
+      color: ${theme.colors.blue800};
     }
 
     .react-tabs__tab--selected {
       border: none;
-      border-bottom: 5px solid ${theme.colors.pink900};
+      border-bottom: 5px solid ${theme.colors.pink850};
       background-color: #f8f5f5;
       font-family: 'CenturyGothicBold';
     }
 
     .react-tabs__tab:focus {
-      border-bottom: 5px solid ${theme.colors.pink900};
+      border-bottom: 5px solid ${theme.colors.pink850};
       box-shadow: none !important;
       outline: none !important;
     }
@@ -103,26 +94,22 @@ export const WrapperIcon = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  /* cursor: pointer; */
 `
+
 export const ButtonOutline = styled.div`
   cursor: pointer;
-  font-size: 16px;
-  line-height: 30px;
-  font-family: 'CenturyGothicBold';
-  background-color: ${theme.colors.pink900};
-  color: ${theme.colors.grey400};
-  padding: 6px 15px;
-  /* width: 140px; */
-  border-radius: 20px;
-
+  height: 32px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  svg {
-    margin-right: 12px;
-  }
+  font-size: 16px
+  border-radius: 6px;
+  background: ${theme.colors.pink850};
+  color:${theme.colors.grey400};
+  border: 2px solid white;
+  align-items:center;
+  justify-content:center;
 `
+
+
 export const BoxButton = styled.div`
   height: inherit;
   /* width: 80px; */

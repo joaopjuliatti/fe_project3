@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-globals */
 import { showToast } from '../components/toast'
 import moment from 'moment'
-import { history } from '~/navigation/history'
+import { history } from '../navigation/history'
 
 export const asyncLocalStorage = {
   setItem(key, value) {

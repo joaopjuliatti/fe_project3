@@ -1,53 +1,54 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
-import { history } from '~/navigation/history'
 
 import * as Yup from 'yup'
 import { withFormik } from 'formik'
 
 import { Input } from '@material-ui/core';
-import { TextErrorInput } from '~/components/text-error-input'
-import { showToast } from '~/components/toast'
+import { TextErrorInput } from '../../components/text-error-input'
+import { showToast } from '../../components/toast'
 
-import { authToken } from '~/services/api'
-import { asyncLocalStorage } from '~/utils'
+import { authToken, getAllFarms } from '../../services/api'
+import { asyncLocalStorage } from '../../utils'
 
-import { ContainerText, Title, Form, ContainerLogin, Section, Button } from './styles'
+import { ContainerText, Title, Form, ContainerLogin, Section, Button, ContainerForm } from './styles'
 
 const FormWrapper = props => {
   const { values, errors, handleChange, touched, handleSubmit, handleBlur } = props
   return (
     <>
       <ContainerLogin>
-        <ContainerText>
-          <Title>Acesse sua conta</Title>
-        </ContainerText>
-        <Form onSubmit={handleSubmit}>
-          <Section>
-            <Input
-              autoFocus
-              id="email"
-              placeholder="Email"
-              value={values.email}
-              type="text"
-              onChange={handleChange('email')}
-              onBlur={handleBlur('email')}
-            />
-            {errors.email && touched.email && <TextErrorInput>{errors.email}</TextErrorInput>}
-          </Section>
+        <ContainerForm>
+          <ContainerText>
+            <Title>Acesse sua conta</Title>
+          </ContainerText>
+          <Form onSubmit={handleSubmit}>
+            <Section>
+              <Input
+                autoFocus
+                id="email"
+                placeholder="Email"
+                value={values.email}
+                type="text"
+                onChange={handleChange('email')}
+                onBlur={handleBlur('email')}
+              />
+              {errors.email && touched.email && <TextErrorInput>{errors.email}</TextErrorInput>}
+            </Section>
 
-          <Section>
-            <Input
-              placeholder="Senha"
-              id="password"
-              type="password"
-              onChange={handleChange('password')}
-              onBlur={handleBlur('password')}
-            />
-            {errors.password && touched.password && <TextErrorInput>{errors.password}</TextErrorInput>}
-          </Section>
-          <Button onClick={handleSubmit}>Entrar</Button>
-        </Form>
+            <Section>
+              <Input
+                placeholder="Senha"
+                id="password"
+                type="password"
+                onChange={handleChange('password')}
+                onBlur={handleBlur('password')}
+              />
+              {errors.password && touched.password && <TextErrorInput>{errors.password}</TextErrorInput>}
+            </Section>
+            <Button onClick={handleSubmit}>Entrar</Button>
+          </Form>
+        </ContainerForm>
       </ContainerLogin>
     </>
   )
@@ -71,39 +72,31 @@ export const FormFormik = withFormik({
   handleSubmit: async (values, { props }) => {
     props.setIsLoading(true)
     const { email, password } = values
-
+    console.log(email, password)
     try {
-      const response = await authToken(email, password)
-
+      const response = await authToken({email, password})
       if (response.status === 401) {
         props.setIsLoading(false)
-        if (response.data.error.message === 'Your email address is not registered') {
+      
+        if (response.data.message && response.data.message === 'Usuário ou senha errados') {
           // email desconhecido
-          showToast('Email não registrado')
-        } else {
-          // email conhecido com senha errada
-          showToast('Senha incorreta, tente novamente')
+          showToast('Usuário ou senha errados')
         }
         return false
       }
-
-      // opção caso ele ter que redefinir senha
-      const { mustChangePassword } = response.data
-
-      if (mustChangePassword) {
-        await asyncLocalStorage.setItem('email', email)
-        history.push('/redefinir')
-      } else {
-        // opção caso o email e senha estão corretos e não precisa redefinir senha
-        const { token, partner } = response.data
+        // opção caso o email e senha estão corretos
+        const { token } = response.data
 
         await asyncLocalStorage.setItem('email', email)
         await asyncLocalStorage.setItem('token', token)
-        await asyncLocalStorage.setItem('partner-name', partner.name)
+        const farms = (await getAllFarms(token)).data.farms
 
-        props.goToPage('home')
-      }
+        await asyncLocalStorage.setItem('FarmId', farms[0].id)
+
+        props.goToPage('animals-control/list-animals')
+
     } catch (error) {
+      console.log(error)
       showToast('Houve um erro ao autenticar o usuário')
     }
   }

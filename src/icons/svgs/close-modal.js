@@ -2,7 +2,7 @@ import React from 'react'
 
 export const CloseModal = () => (
 <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
- width="48.000000pt" height="48.000000pt" viewBox="0 0 48.000000 48.000000"
+ width="32.000000pt" height="32.000000pt" viewBox="0 0 48.000000 48.000000"
  preserveAspectRatio="xMidYMid meet">
 
 <g transform="translate(0.000000,48.000000) scale(0.100000,-0.100000)"

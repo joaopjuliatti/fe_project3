@@ -2,11 +2,15 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Navigation } from './navigation'
 
+import { TemplateProvider } from './components/Template/provider'
+
 console.error = () => {}
 console.warn = () => {}
 
 ReactDOM.render(
-  <Navigation />,
+  <TemplateProvider>
+    <Navigation />
+  </TemplateProvider>,
   document.getElementById('root')
 )
 

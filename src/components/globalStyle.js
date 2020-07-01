@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 const  colors  = {
     pink900: "#DE0C4B",
+    pink850 : "#F45353",
     pink800: "#FF5776",
     blue900: "#01163E",
     blue800: "#323B69",
@@ -30,7 +31,7 @@ export const theme = {
 
 export const Text = styled.div`
   ${({ color }) => (color ? `color: ${color};` : `color : ${theme.colors.blue900};`)}
-  ${({ bold }) => (bold ? `font-family: CenturyGothicBold;` : `font-family: CenturyGothic;`)}
+  ${({ bold }) => (bold ? `font-family: 'Roboto';` : `font-family: CenturyGothic;`)}
   
   ${({ size }) => (size ? `font-size: ${size};` : ``)}
   ${({ lineHeight }) => (lineHeight ? `line-height: ${lineHeight};` : ``)}

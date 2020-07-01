@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
   left: 0;
   right: 0;
   height: 81px;
-  background-color: ${theme.colors.blue900};
+  background-color: ${theme.colors.blue700};
   z-index: 10;
 
   display: flex;
@@ -15,7 +15,7 @@ export const Wrapper = styled.div`
 `
 
 export const ListButton = styled.div`
-  background: ${theme.colors.grey400};
+  background: ${theme.colors.grey500};
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
   border-radius: 20px;
 
@@ -68,15 +68,24 @@ export const BoxButton = styled.div`
   svg {
     margin-right: 10px;
   }
+`
 
-  ${theme.breakpoints.down('md')} {
-    height: 40px;
-    width: 40px;
-    margin-right: 10px;
-    padding: unset;
 
-    svg {
-      margin-right: unset;
-    }
-  }
+
+export const WrapperTextLink = styled.div`
+`
+
+export const TextLink = styled.div`
+  font-family: 'CenturyGothicBold';
+  margin: 0 auto;
+  position: relative;
+  color: ${theme.colors.white100};
+  border-bottom: ${({active}) => (active ? '2px solid red' : 'none')};
+`
+
+export const WrapperLinks = styled.div`
+  width:30%;
+  display:flex;
+  flex-direction:row;
+  justify-content:space-between;
 `

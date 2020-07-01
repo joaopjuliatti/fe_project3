@@ -69,9 +69,6 @@ export const Body = styled.div`
 `
 
 export const Content = styled.div`
-  ${theme.breakpoints.down('md')} {
-    /* overflow-y: auto; */
-  }
 `
 
 export const Title = styled.h3`
@@ -83,11 +80,6 @@ export const Title = styled.h3`
   font-weight: bold;
   margin: 0;
   margin-bottom: 20px;
-
-  ${theme.breakpoints.down('md')} {
-    font-size: 20px;
-    line-height: 30px;
-  }
 `
 
 export const CloseModalWrapper = styled.div`
