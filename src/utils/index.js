@@ -25,7 +25,7 @@ export const checkToken = async () => {
   }
 }
 
-const calculateDays = (days, now) => {
+export const calculateDays = (days, now) => {
   if (days === undefined || days === null || !days) return '00/00/0000'
 
   const datewithdays = moment(now)

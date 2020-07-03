@@ -15,7 +15,7 @@ import { useListAnimals } from './hooks'
 import { Content, ContainerTable, WrapperTabs, BoxButton, WrapperIcon } from './styles'
 
 export const ListAnimals = () => {
-  const { setIsLoading, goToPage, activePage, setActivePage } = useContext(TemplateContext)
+  const { setIsLoading, goToPage, activePage, setActivePage, FarmId } = useContext(TemplateContext)
   const [
     showCells,
     setRowsFattening,
@@ -27,7 +27,7 @@ export const ListAnimals = () => {
     setVisibleOpt,
     handleModal,
     showAddAnimalModal,
-  ] = useListAnimals(setIsLoading, goToPage, activePage, setActivePage)
+  ] = useListAnimals(setIsLoading, goToPage, activePage, setActivePage, FarmId)
 
   return (
     <>

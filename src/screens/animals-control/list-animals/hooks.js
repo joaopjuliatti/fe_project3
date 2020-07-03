@@ -11,7 +11,7 @@ import { showToast } from '../../../components/toast'
 
 import { WrapperIcon, ButtonOutline, BoxButton } from './styles'
 
-export const useListAnimals = (setIsLoading, goToPage, activePage, setActivePage) => {
+export const useListAnimals = (setIsLoading, goToPage, activePage, setActivePage, FarmId) => {
 
   const INITIAL_STATE = [
         { item: 'RealId', label: 'Numero de Identificação', show: true, blocked: true },
@@ -185,7 +185,7 @@ export const useListAnimals = (setIsLoading, goToPage, activePage, setActivePage
     setIsLoading(true)
     generateTables()
     setUpdateTable(false)
-  }, [updateTable])
+  }, [ FarmId ,updateTable])
 
 
   return [

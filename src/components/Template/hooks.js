@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { history } from '../../navigation/history'
+import { asyncLocalStorage } from '../../utils'
 
 import { showToast } from '../toast'
 
@@ -17,6 +18,17 @@ export const useModal = () => {
   }
 
   return [ showLogoutModal, handleLogoutModal]
+}
+
+export const useFarmMenu = () => {
+  const [FarmId, setFarmId] = useState('')
+
+  const handleFarmIdUpdate = async newFarmId => {
+    await asyncLocalStorage.setItem('FarmId',newFarmId)
+    setFarmId(newFarmId)
+  }
+
+  return [ FarmId, handleFarmIdUpdate]
 }
 
 

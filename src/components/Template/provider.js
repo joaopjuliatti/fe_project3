@@ -1,14 +1,15 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react'
 import { TemplateContext } from './context'
-import {  useScreenControl, useInfos, useModal } from './hooks'
+import {  useScreenControl, useInfos, useModal, useFarmMenu } from './hooks'
 
 export const TemplateProvider = props => {
   const [isLoading, setIsLoading] = useState(true)
 
-  const [ showLogoutModal, handleLogoutModal] = useModal()
+  const [ showLogoutModal, handleLogoutModal ] = useModal()
   const [logout] = useInfos(handleLogoutModal)
-
+  const [FarmId, handleFarmIdUpdate ] = useFarmMenu()
+  
   const [goToPage, activePage, setActivePage] = useScreenControl(setIsLoading)
 
   const { children } = props
@@ -17,11 +18,13 @@ export const TemplateProvider = props => {
     isLoading,
     setIsLoading,
     showLogoutModal,
-    handleLogoutModal,
+    handleLogoutModal,  
     logout,
     goToPage,
     activePage,
-    setActivePage
+    setActivePage,
+    FarmId,
+    handleFarmIdUpdate
   }
 
   return <TemplateContext.Provider value={providerValue}>{children}</TemplateContext.Provider>

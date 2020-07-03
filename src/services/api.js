@@ -117,3 +117,18 @@ export const api = axios.create({
     }
   }
 
+  export const addFarm = async (data,token) => {
+    try {
+      const response = await api.post('/farm/create',data,{
+        headers: {
+          Authorization: token,
+        }
+      })
+      return response
+    } catch (error) {
+      checkIfNotAuthorized(error)
+      return error.response
+    }
+  }
+
+

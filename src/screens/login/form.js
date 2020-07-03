@@ -92,6 +92,7 @@ export const FormFormik = withFormik({
         const farms = (await getAllFarms(token)).data.farms
 
         await asyncLocalStorage.setItem('FarmId', farms[0].id)
+        await asyncLocalStorage.setItem('FarmName', farms[0].name)
 
         props.goToPage('home')
 
