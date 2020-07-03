@@ -2,7 +2,7 @@
 import React from 'react'
 import { CloseModal } from '../../icons/svgs/close-modal'
 
-import { Overlay, Header, Body, Container, Title, CloseModalWrapper, Footer, Content } from './style'
+import { Overlay, Header, Body, Container, Title, CloseModalWrapper, Footer, Content } from './styles'
 
 export const Modal = ({ isWithoutHeight, title, onDismiss, children, footer, width, radius }) => {
   return (

@@ -15,14 +15,14 @@ import {
   WrapperLogout,
   BoxOption,
   WrapperIcon,
-  WrapperText
+  WrapperText,
+  TextLink
 } from './styles'
 import { useHome } from './hooks'
 
 export const Home = () => {
-  const { setIsLoading, goToPage, setActivePage } = useContext(TemplateContext)
+  const { setIsLoading,handleLogoutModal, goToPage, setActivePage } = useContext(TemplateContext)
   const [handlePage] = useHome(setIsLoading, goToPage, setActivePage)
-
   return (
     <>
         <>
@@ -66,7 +66,11 @@ export const Home = () => {
                 </BoxOption>
               </WrapperOptions>
               <WrapperLogout>
-                {/* <TextLink text="Logout" color={theme.colors.pink900} onClick={() => handleLogoutModal(true)} /> */}
+                <TextLink onClick={() => {
+                  handleLogoutModal(true)
+                  }} > 
+                  Logout
+                </TextLink>
               </WrapperLogout>
             </Content>
           </Container>

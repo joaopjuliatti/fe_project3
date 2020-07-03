@@ -12,17 +12,17 @@ export const Navigation = () => {
   return (
     <Router history={history}>
       <Switch>
-        {routes.map(item => (
+        {routes.map(item => {
+          console.log(item.path)
+          return(
           <Route
             key={item.key}
-            exact={item.exact}
+            exact
             path={item.path}
-            // isPrivate={item.private}
-            // isFirstScreen={item.isFirstScreen}
             component={item.component}
           />
-        ))}
-        {/* <Redirect to="/404" exact /> */}
+        )})}
+        <Redirect to="/404" exact />
       </Switch>
       <ToastComponent />
     </Router>

@@ -28,13 +28,14 @@ export const ListAnimals = () => {
     handleModal,
     showAddAnimalModal,
   ] = useListAnimals(setIsLoading, goToPage, activePage, setActivePage)
+
   return (
     <>
       {showAddAnimalModal && (
         <AddAnimalModal handleModal={handleModal} setIsLoading={setIsLoading} />
       )}
       <Header showLinks>
-      {(
+      {(  
         <WrapperIcon>
           <BoxButton active={activePage === 'animal-control/list-animals'} onClick={() => handleModal(true)}>
               <PlusIcon color={theme.colors.pink900} />

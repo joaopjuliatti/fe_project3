@@ -93,7 +93,7 @@ export const FormFormik = withFormik({
 
         await asyncLocalStorage.setItem('FarmId', farms[0].id)
 
-        props.goToPage('animals-control/list-animals')
+        props.goToPage('home')
 
     } catch (error) {
       console.log(error)

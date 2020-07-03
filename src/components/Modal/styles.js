@@ -10,7 +10,6 @@ const opacity = keyframes`
   }
 `
 
-// ${({ isWithoutHeight }) => (isWithoutHeight ? 'flex-start' : 'center')};
 export const Overlay = styled.div`
   align-items: center;
   position: fixed;

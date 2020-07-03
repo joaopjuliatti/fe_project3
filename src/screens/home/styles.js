@@ -49,15 +49,13 @@ export const WrapperOptions = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-
+  margin-bottom: 50px;
 `
 
 export const WrapperLogout = styled.div`
-  h5 {
-    font-size: 16px;
-    line-height: 20px;
-    font-family: 'CenturyGothicBold';
-  }
+  display:flex;
+  align-items:center;
+  justify-content:center;
 `
 
 export const BoxOption = styled.div`
@@ -93,3 +91,12 @@ export const WrapperIcon = styled.div`
 `
 
 export const WrapperText = styled.div``
+
+export const TextLink = styled.div`
+  font-family: 'CenturyGothicBold';
+  font-size: 25px;
+  width: 85px;
+  color: ${theme.colors.pink850};
+  border-bottom: 2px solid ${theme.colors.pink850};
+  line-height: 20px;
+`

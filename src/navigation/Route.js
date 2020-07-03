@@ -2,17 +2,24 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
 
-export default function RouteWrapper(props) {
-  const { component: Component, isTemplate, ...rest } = props
+import { Template } from '../components/Template'
 
+export default function RouteWrapper(props) {
+  const { component: Component, path, ...rest} = props
+  console.log(`8uRADPdPak6weAB`)
   return (
     <>
       <Route
         {...rest}
         render={prop => (
-        <Component {...prop} />
+          <>
+            <Template>
+              <Component {...prop} />
+            </Template>
+          </>
         )}
       />
     </>
   )
 }
+

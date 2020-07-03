@@ -171,9 +171,9 @@ export const useListAnimals = (setIsLoading, goToPage, activePage, setActivePage
           setRowsFattening([...rowsFatteningResponse])
           setRowsSold([...rowsDeactiveResponse])
           setIsLoading(false)
+          console.log('render')
         }
       } catch (error) {
-        console.log(error)
         setWarningMessage('Ops, ocorreu um erro. Atualize essa página e entre em contato com João se o erro permanecer.')
         setIsLoading(false)
       }
@@ -185,7 +185,7 @@ export const useListAnimals = (setIsLoading, goToPage, activePage, setActivePage
     setIsLoading(true)
     generateTables()
     setUpdateTable(false)
-  }, [])
+  }, [updateTable])
 
 
   return [

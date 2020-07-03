@@ -14,24 +14,21 @@ export const routes = [
   //   private: false,
   // },
   {
-    key: 1,
+    key: 0,
     path: '/',
     exact: true,
-    private: false,
     component: Login
   },
   {
-    key: 2,
+    key: 1,
     path: '/home',
     exact: true,
-    private: false,
     component: Home
   },
   {
-    key: 3,
+    key: 2,
     path: '/animals-control/list-animals',
     exact: true,
-    private: false,
     component: ListAnimals
   },
 ]

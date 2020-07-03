@@ -4,14 +4,15 @@ import React, { useContext } from 'react'
 import { Loading } from '../Loading'
 import { View } from './styles'
 import { TemplateContext } from './context'
+import { LogoutModal } from '../LogoutModal'
 
 export const Template = props => {
   const {  children } = props
-  const { isLoading } = useContext(TemplateContext) // activeScreen,
-
+  const { isLoading, showLogoutModal, handleLogoutModal, logout } = useContext(TemplateContext) // activeScreen,
   return (
     <>
-      {isLoading && <Loading />}
+      {showLogoutModal && <LogoutModal handleModal={handleLogoutModal} logout={logout} />}
+      { isLoading && <Loading />}
       <View>{children}</View>
     </>
   )

@@ -12,7 +12,7 @@ export const Header = props => {
     const {children, showLinks } = props
     const { goToPage, activePage, setActivePage } = useContext(TemplateContext)
     const [handlePage] = useHeader(goToPage, activePage, setActivePage)
-    console.log(activePage)
+
   return (
     <Wrapper>
       <Container>
