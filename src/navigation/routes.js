@@ -4,6 +4,7 @@ import { Login } from '../screens/login'
 import { Home } from '../screens/home'
 //animals-control
 import { ListAnimals } from '../screens/animals-control/list-animals'
+import { CashFlow } from '../screens/cash-flow'
 
 
 export const routes = [
@@ -31,4 +32,10 @@ export const routes = [
     exact: true,
     component: ListAnimals
   },
+  {
+    key: 3,
+    path: '/cash-flow',
+    exact: true,
+    component: CashFlow
+  }
 ]

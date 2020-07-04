@@ -3,7 +3,6 @@ import React from 'react'
 
 import { Input } from '@material-ui/core';
 
-import { TextErrorInput } from '../../../../components/text-error-input'
 import { showToast } from '../../../../components/toast'
 
 import { addAnimal } from '../../../../services/api'

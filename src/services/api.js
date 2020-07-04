@@ -132,3 +132,58 @@ export const api = axios.create({
   }
 
 
+  export const getCashFlow = async (FarmId,data,token) => {
+    try {
+      const response = await api.post(`/cash-flow/${FarmId}/all`, data,{
+        headers: {
+          Authorization: token,
+        }
+      })
+      return response
+    } catch (error) {
+      checkIfNotAuthorized(error)
+      return error.response
+    }
+  }
+
+  export const getFlowTypes = async (token) => {
+    try {
+      const response = await api.get('/flow-type/all',{
+        headers: {
+          Authorization: token,
+        }
+      })
+      return response
+    } catch (error) {
+      checkIfNotAuthorized(error)
+      return error.response
+    }
+  }
+
+  export const deleteCashFlow = async (data, token) => {
+    try {
+      const response = await api.post(`/cash-flow/delete`,data,{
+        headers: {
+          Authorization: token,
+        }
+      })
+      return response
+    } catch (error) {
+      checkIfNotAuthorized(error)
+      return error.response
+    }
+  }
+
+  export const addCashFlow = async (data, token) => {
+    try {
+      const response = await api.post(`/cash-flow/create`,data,{
+        headers: {
+          Authorization: token,
+        }
+      })
+      return response
+    } catch (error) {
+      checkIfNotAuthorized(error)
+      return error.response
+    }
+  }

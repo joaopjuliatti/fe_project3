@@ -212,7 +212,8 @@ export class FormWrapper extends React.Component {
                 value={this.state.values.state}
                 onChange={this.handleChange}
                 id='state'
-              > {
+              > 
+              {
                   this.state.states.map(state =>{
                     if(this.state.state ===state){
                       return (
