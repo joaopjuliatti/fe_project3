@@ -1,8 +1,8 @@
 const { REACT_APP_API_ENV } = process.env
 
 const URLS = {
-  production: '',
-  remote_development: '',
+  production: 'https://manager-3-brothers.herokuapp.com/',
+  remote_development: 'https://manager-3-brothers.herokuapp.com/',
   local_development: 'http://localhost:5000'
 }
 
