@@ -99,6 +99,8 @@ export const FormFormik = withFormik({
     } catch (error) {
       console.log(error)
       showToast('Houve um erro ao autenticar o usuário')
+      props.setIsLoading(false)
+
     }
   }
 })(FormWrapper)

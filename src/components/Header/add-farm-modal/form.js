@@ -77,12 +77,12 @@ export class FormWrapper extends React.Component {
     event.preventDefault()
     this.props.setIsLoading(true)
     const { zipcode, name, street, number, complement, district, city, state } = this.state.values
-    if(!zipcode || !name || !street || !number || !complement  || !district || !city   || !state )
-    {
-      this.props.setIsLoading(false)
-      showToast('Favor Preencha todos os campos')
-      return false
-    }
+    // if(!zipcode || !name || !street || !number || !complement  || !district || !city   || !state )
+    // {
+    //   this.props.setIsLoading(false)
+    //   showToast('Favor Preencha todos os campos')
+    //   return false
+    // }
     try {
       const token = await asyncLocalStorage.getItem("token")
       const response = await addFarm( {zipcode, name, street, number, complement, district, city, state}, token)

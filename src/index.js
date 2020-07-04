@@ -4,6 +4,7 @@ import { Navigation } from './navigation'
 
 import { TemplateProvider } from './components/Template/provider'
 
+console.log = () => {}
 console.error = () => {}
 console.warn = () => {}
 
