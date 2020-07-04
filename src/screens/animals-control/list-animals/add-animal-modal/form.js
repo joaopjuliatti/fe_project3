@@ -53,6 +53,7 @@ export class FormWrapper extends React.Component {
         showToast('Houve um  erro ao cadastrar novo animal')
         return false
       }
+      this.props.setUpdateTable(true)
       this.props.setIsLoading(false)
       this.props.handleModal(false)
       showToast('Animal Cadastrado com Sucesso')

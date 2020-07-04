@@ -50,7 +50,7 @@ export const CashFlow = () => {
       </Header>
       <Content>
         <WrapperGraphs>
-          <GraphSection id='HistogramGraph'>
+          {pizzaChartData.length>1 && (<GraphSection id='HistogramGraph'>
           <Chart
             width={'800px'}
             height={'500px'}
@@ -62,8 +62,8 @@ export const CashFlow = () => {
               is3D: true,
             }}
             />
-          </GraphSection>
-          <GraphSection>
+          </GraphSection>)}
+          {barChartData.length>=1 && (<GraphSection>
           <Chart
             width={'800px'}
             height={'500px'}
@@ -82,7 +82,7 @@ export const CashFlow = () => {
               },
             }}
           />
-          </GraphSection>
+          </GraphSection>)}
         </WrapperGraphs>
         <FormDate onSubmit={handleSubmit}>
             <Section>

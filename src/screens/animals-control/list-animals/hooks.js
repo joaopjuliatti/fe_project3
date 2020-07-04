@@ -199,5 +199,6 @@ export const useListAnimals = (setIsLoading, goToPage, activePage, setActivePage
     setVisibleOpt,
     handleModal,
     showAddAnimalModal,
+    setUpdateTable
   ]
 }

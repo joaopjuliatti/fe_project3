@@ -27,12 +27,13 @@ export const ListAnimals = () => {
     setVisibleOpt,
     handleModal,
     showAddAnimalModal,
+    setUpdateTable
   ] = useListAnimals(setIsLoading, goToPage, activePage, setActivePage, FarmId)
 
   return (
     <>
       {showAddAnimalModal && (
-        <AddAnimalModal handleModal={handleModal} setIsLoading={setIsLoading} />
+        <AddAnimalModal handleModal={handleModal} setIsLoading={setIsLoading} setUpdateTable={setUpdateTable} />
       )}
       <Header showLinks>
       {(  

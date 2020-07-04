@@ -28,11 +28,13 @@ export const Header = props => {
             farms,
             handleClickMenuFarm,
             handleCloseMenuFarm,
-            handleClickItemFarm ] = useHeader(goToPage, activePage, setActivePage, setIsLoading, handleFarmIdUpdate)
+            handleClickItemFarm,
+            setUpdateFarms
+           ] = useHeader(goToPage, activePage, setActivePage, setIsLoading, handleFarmIdUpdate)
 
   return (
     <>
-    {showAddFarmModal && <AddFarmModal handleModal={handleModal} setIsLoading={setIsLoading} />}
+    {showAddFarmModal && <AddFarmModal handleModal={handleModal} setIsLoading={setIsLoading} setUpdateFarms={setUpdateFarms}/>}
     <Wrapper>
       <Container>
         <ListButton single onClick={() => handlePage('home')}>

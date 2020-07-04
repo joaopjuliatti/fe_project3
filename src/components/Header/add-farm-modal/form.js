@@ -93,6 +93,7 @@ export class FormWrapper extends React.Component {
         showToast('Houve um  erro ao cadastrar nova propriedade.')
         return false
       }
+      this.props.setUpdateFarms(true)
       this.props.setIsLoading(false)
       this.props.handleModal(false)
       showToast('Propriedade cadastrado com Sucesso')

@@ -6,7 +6,7 @@ import { Modal } from '../../../../components/Modal'
 
 
 export const AddAnimalModal = props => {
-  const { handleModal,setIsLoading} =  props
+  const { handleModal, setIsLoading, setUpdateTable} =  props
 
   return (     
   <Modal
@@ -15,7 +15,7 @@ export const AddAnimalModal = props => {
     radius={20}
     onDismiss={() => handleModal(false)}
   >
-    <FormWrapper  setIsLoading={setIsLoading} handleModal={handleModal}/>
+    <FormWrapper  setIsLoading={setIsLoading} handleModal={handleModal} setUpdateTable={setUpdateTable}/>
   </Modal>)
   
 }

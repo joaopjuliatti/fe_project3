@@ -9,6 +9,7 @@ export const useHeader = (goToPage, activePage, setActivePage, setIsLoading, han
   const [showAddFarmModal, SetShowAddFarmModal] = useState(false)
   const [anchorEl, setAnchorEl] = useState(null);
   const [updateName, setUpdateName] = useState(false)
+  const [updateFarms, setUpdateFarms] = useState(false)
   const [farmName, setFarmName] = useState('');
   const [farmAnchorEl, setFarmAnchorEl] = useState(null);
   const [farms, setFarms] = useState([]);
@@ -77,9 +78,12 @@ export const useHeader = (goToPage, activePage, setActivePage, setIsLoading, han
 
 
   useEffect(() => {
+    setIsLoading(true)
     getFarmData()
     setUpdateName(false)
-  }, [updateName])
+    setUpdateFarms(false)
+    setIsLoading(false)
+  }, [updateFarms,updateName])
 
 
   return [handlePage,
@@ -93,6 +97,7 @@ export const useHeader = (goToPage, activePage, setActivePage, setIsLoading, han
       farms,
       handleClickMenuFarm,
       handleCloseMenuFarm,
-      handleClickItemFarm
+      handleClickItemFarm,
+      setUpdateFarms
     ]
 }
